@@ -8,6 +8,7 @@ import RegisterPage from "./views/RegisterPage/RegisterPage.js";
 import NavBar from "./views/NavBar/NavBar";
 import Footer from "./views/Footer/Footer";
 import VideoUploadPage from "./views/VideoUploadPage/VideoUploadPage";
+import VideoDetailPage from "./views/videoDetailPage/VideoDetailPage";
 
 //null   모두 접근 가능
 //true   로그인 한 사람만 접근 가능
@@ -26,6 +27,11 @@ function App() {
             exact
             path="/video/upload"
             component={Auth(VideoUploadPage, true)}
+          />
+          <Route
+            exact
+            path="/video/:videoId"
+            component={Auth(VideoDetailPage, null)}
           />
         </Switch>
       </div>

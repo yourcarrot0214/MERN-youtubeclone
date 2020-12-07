@@ -110,7 +110,7 @@ function VideoUploadPage(props) {
     const variables = {
       writer: user.userData._id,
       title: videoTitle,
-      description: Descriptions,
+      description: description,
       privacy: privateNumber,
       filePath: filePath,
       category: category,
@@ -121,7 +121,8 @@ function VideoUploadPage(props) {
     Axios.post("/api/video/uploadVideo", variables).then((response) => {
       if (response.data.success) {
         message.success("Video Upload Success!");
-        setTimeout(() => props.history.push("/"), 3000);
+        console.log(response.data);
+        // setTimeout(() => props.history.push("/"), 3000);
       } else {
         console.log("Failed :: video upload.");
       }
