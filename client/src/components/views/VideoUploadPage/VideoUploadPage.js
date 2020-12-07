@@ -1,7 +1,17 @@
 import React, { useState } from "react";
-import { Typography, Button, Form, message, Input, Icon } from "antd";
+import {
+  Typography,
+  Button,
+  Form,
+  message,
+  Input,
+  Icon,
+  Descriptions,
+} from "antd";
 import Dropzone from "react-dropzone";
 import Axios from "axios";
+import { useSelector } from "react-redux";
+import { duration } from "moment";
 
 const { TextArea } = Input;
 const { Title } = Typography;
@@ -18,7 +28,9 @@ const CategoryOption = [
   { value: 3, label: "Pets & Animals" },
 ];
 
-function VideoUploadPage() {
+function VideoUploadPage(props) {
+  const user = useSelector((state) => state.user);
+
   const [videoTitle, setVideoTitle] = useState("");
   const [description, setDescription] = useState("");
   const [privateNumber, setPrivateNumber] = useState(0);
@@ -77,13 +89,52 @@ function VideoUploadPage() {
     });
   };
 
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    if (user.userData && !user.userData.isAuth) {
+      return message.warn("Please Log In First.");
+    }
+
+    if (
+      videoTitle === "" ||
+      description === "" ||
+      category === "" ||
+      filePath === "" ||
+      fileDuration === "" ||
+      thumbnail === ""
+    ) {
+      return message.warn("Please first fill all the fields.");
+    }
+
+    const variables = {
+      writer: user.userData._id,
+      title: videoTitle,
+      description: Descriptions,
+      privacy: privateNumber,
+      filePath: filePath,
+      category: category,
+      duration: fileDuration,
+      thumbnail: thumbnail,
+    };
+
+    Axios.post("/api/video/uploadVideo", variables).then((response) => {
+      if (response.data.success) {
+        message.success("Video Upload Success!");
+        setTimeout(() => props.history.push("/"), 3000);
+      } else {
+        console.log("Failed :: video upload.");
+      }
+    });
+  };
+
   return (
     <div style={{ maxWidth: "700px", margin: "2rem auto" }}>
       <div style={{ textAlign: "center", marginBottom: "2rem" }}>
         <Title level={2}>Upload Video</Title>
       </div>
 
-      <Form onSubmit>
+      <Form onSubmit={onSubmit}>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           {/* Drop Zone */}
 
@@ -156,7 +207,7 @@ function VideoUploadPage() {
         <br />
         <br />
 
-        <Button type="primary" size="large" onClick>
+        <Button type="primary" size="large" onClick={onSubmit}>
           Submit
         </Button>
       </Form>
