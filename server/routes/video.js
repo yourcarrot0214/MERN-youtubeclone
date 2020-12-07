@@ -53,6 +53,16 @@ router.post("/uploadVideo", (req, res) => {
   });
 });
 
+router.get("/getVideos", (req, res) => {
+  // MongoDB 에서 video 정보들을 찾아 보내준다.
+  Video.find()
+    .populate("writer")
+    .exec((err, videos) => {
+      if (err) return res.status(400).send(err);
+      return res.status(200).json({ success: true, videos });
+    });
+});
+
 router.post("/thumbnail", (req, res) => {
   // Thumbnail 생성, 비디오 런타임 가져오기
 
