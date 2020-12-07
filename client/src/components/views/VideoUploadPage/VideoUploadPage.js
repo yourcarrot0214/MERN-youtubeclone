@@ -23,6 +23,9 @@ function VideoUploadPage() {
   const [description, setDescription] = useState("");
   const [privateNumber, setPrivateNumber] = useState(0);
   const [category, setCategory] = useState("Film & Animation");
+  const [fileDuration, setFileDuration] = useState("");
+  const [filePath, setFilePath] = useState("");
+  const [thumbnail, setThumbnail] = useState("");
 
   const onTitleChange = (e) => {
     setVideoTitle(e.currentTarget.value);
@@ -50,6 +53,24 @@ function VideoUploadPage() {
     Axios.post("/api/video/uploadfiles", formData, config).then((response) => {
       if (response.data.success) {
         console.log(response.data);
+        let variable = {
+          filePath: response.data.filePath,
+          fileName: response.data.fileName,
+        };
+
+        setFilePath(response.data.filePath);
+
+        Axios.post("/api/video/thumbnail", variable)
+          .then((response) => {
+            if (response.data.success) {
+              console.log(response.data);
+              setFileDuration(response.data.fileDuration);
+              setThumbnail(response.data.thumbsFilePath);
+            } else {
+              console.log("Failed :: Make a Thumbnail.");
+            }
+          })
+          .catch((err) => console.log(err));
       } else {
         console.log(`Failed : video upload`);
       }
@@ -66,7 +87,12 @@ function VideoUploadPage() {
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           {/* Drop Zone */}
 
-          <Dropzone onDrop={onDrop} multiple={false} maxSize={100000000000}>
+          <Dropzone
+            accept="video/*"
+            onDrop={onDrop}
+            multiple={false}
+            maxSize={100000000000}
+          >
             {({ getRootProps, getInputProps }) => (
               <div
                 style={{
@@ -86,9 +112,11 @@ function VideoUploadPage() {
           </Dropzone>
 
           {/* Thumbnail */}
-          <div>
-            <img src="" alt="" />
-          </div>
+          {thumbnail && (
+            <div>
+              <img src={`http://localhost:5000/${thumbnail}`} alt={thumbnail} />
+            </div>
+          )}
         </div>
 
         <br />
