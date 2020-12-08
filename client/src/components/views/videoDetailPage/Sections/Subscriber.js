@@ -32,9 +32,37 @@ function Subscriber(props) {
     });
   }, []);
 
+  const onSubscribe = () => {
+    // subcribed ? unSubscribe : subscribe
+    let variable = { userTo: userTo, userFrom: userFrom };
+
+    if (subscribed) {
+      Axios.post("/api/subscribe/unSubscribe", variable).then((response) => {
+        if (response.data.success) {
+          console.log("Success :: unSubscribe");
+          setSubscribeNumber((prev) => prev - 1);
+          setSubscribed(!subscribed);
+        } else {
+          console.log("Failed :: unSubscribe");
+        }
+      });
+    } else {
+      Axios.post("/api/subscribe/subscribe", variable).then((response) => {
+        if (response.data.success) {
+          console.log("Success :: Subscribe");
+          setSubscribeNumber((prev) => prev + 1);
+          setSubscribed(!subscribed);
+        } else {
+          console.log("Failed :: Subscribe");
+        }
+      });
+    }
+  };
+
   return (
     <div>
       <button
+        onClick={onSubscribe}
         style={{
           backgroundColor: `${subscribed ? "#AAAAAA" : "#CC0000"}`,
           borderRadius: "4px",
