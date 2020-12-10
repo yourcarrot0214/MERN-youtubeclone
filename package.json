@@ -1,5 +1,4 @@
 {
-  "hpmepage": "https://yourcarrot0214.github.io/MERN-youtubeclone/",
   "name": "react-boiler-plate",
   "version": "1.0.0",
   "description": "react boiler plate",
@@ -12,9 +11,7 @@
     "start": "node server/index.js",
     "backend": "nodemon server/index.js",
     "frontend": "npm run start --prefix client",
-    "dev": "concurrently \"npm run backend\" \"npm run start --prefix client\"",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "dev": "concurrently \"npm run backend\" \"npm run start --prefix client\""
   },
   "author": "Carrot",
   "license": "ISC",
