@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import Axios from "axios";
 import SingleComment from "./SingleComment";
+import ReplyComment from "./ReplyComment";
 
 function Comment(props) {
   const user = useSelector((state) => state.user);
@@ -43,12 +44,21 @@ function Comment(props) {
         props.commentLists.map(
           (comment, index) =>
             !comment.responseTo && (
-              <SingleComment
-                key={index}
-                postId={videoId}
-                comment={comment}
-                refreshFunction={props.refreshFunction}
-              />
+              <React.Fragment>
+                <SingleComment
+                  key={index + comment.content}
+                  postId={videoId}
+                  comment={comment}
+                  refreshFunction={props.refreshFunction}
+                />
+                <ReplyComment
+                  key={comment.content + index}
+                  parentCommentId={comment._id}
+                  postId={videoId}
+                  commentLists={props.commentLists}
+                  refreshFunction={props.refreshFunction}
+                />
+              </React.Fragment>
             )
         )}
       {/* Root Comment From */}

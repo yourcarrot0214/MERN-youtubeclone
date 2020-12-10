@@ -35,6 +35,7 @@ function SingleComment(props) {
         console.log("singleComment response data", response.data.result);
         props.refreshFunction(response.data.result);
         setCommentValue("");
+        setOpenReply(!openReply);
       } else {
         console.log("Failed :: save comment from singleComment component.");
       }
