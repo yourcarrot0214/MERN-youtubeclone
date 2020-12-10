@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import Axios from "axios";
+import SingleComment from "./SingleComment";
 
 function Comment(props) {
   const user = useSelector((state) => state.user);
@@ -22,7 +23,9 @@ function Comment(props) {
 
     Axios.post("/api/comment/saveComment", variables).then((response) => {
       if (response.data.success) {
-        console.log(response.data.result);
+        console.log("comment data : ", response.data.result);
+        props.refreshFunction(response.data.result);
+        setCommentValue("");
       } else {
         console.log("Failed :: save comment.");
       }
@@ -36,7 +39,18 @@ function Comment(props) {
       <br />
 
       {/* Comment Lists */}
-
+      {props.commentLists &&
+        props.commentLists.map(
+          (comment, index) =>
+            !comment.responseTo && (
+              <SingleComment
+                key={index}
+                postId={videoId}
+                comment={comment}
+                refreshFunction={props.refreshFunction}
+              />
+            )
+        )}
       {/* Root Comment From */}
 
       <form style={{ display: "flex" }} onSubmit={onSubmit}>

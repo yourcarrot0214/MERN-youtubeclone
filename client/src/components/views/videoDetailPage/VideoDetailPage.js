@@ -10,6 +10,7 @@ function VideoDetailPage(props) {
   const variable = { videoId: videoId };
 
   const [video, setVideo] = useState([]);
+  const [comments, setComments] = useState([]);
 
   useEffect(() => {
     Axios.post("/api/video/getVideoDetail", variable).then((response) => {
@@ -20,7 +21,19 @@ function VideoDetailPage(props) {
         console.log("Failed :: get video data.");
       }
     });
+
+    Axios.post("/api/comment/getComments", variable).then((response) => {
+      if (response.data.success) {
+        setComments(response.data.comments);
+      } else {
+        console.log("Failed :: get Comments data.");
+      }
+    });
   }, []);
+
+  const updateComment = (newComment) => {
+    setComments(comments.concat(newComment));
+  };
 
   if (video.writer) {
     return (
@@ -49,7 +62,11 @@ function VideoDetailPage(props) {
             </List.Item>
 
             {/* Comments */}
-            <Comment postId={videoId} />
+            <Comment
+              postId={videoId}
+              commentLists={comments}
+              refreshFunction={updateComment}
+            />
           </div>
         </Col>
 
