@@ -23,6 +23,7 @@ router.post("/saveComment", (req, res) => {
   });
 });
 
+// Comment request :: From VideoDetailPage
 router.post("/getComments", (req, res) => {
   Comment.find({ postId: req.body.videoId })
     .populate("wirter")

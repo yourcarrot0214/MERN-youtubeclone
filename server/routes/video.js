@@ -29,8 +29,8 @@ const upload = multer({ storage: storage }).single("file");
 //             Video
 //=================================
 
+// Video File :: client에서 전달받은 file(video)를 server에 upload.
 router.post("/uploadfiles", (req, res) => {
-  // client에서 받은 file(video)를 서버에 저장한다.
   upload(req, res, (err) => {
     if (err) {
       return res.json({ success: false, err });
@@ -43,6 +43,7 @@ router.post("/uploadfiles", (req, res) => {
   });
 });
 
+// Video Upload :: video 정보를 DB에 upload.
 router.post("/uploadVideo", (req, res) => {
   // Video model을 가져와서 request로 온 정보를 담아 저장한다.
   const video = new Video(req.body);
@@ -53,6 +54,7 @@ router.post("/uploadVideo", (req, res) => {
   });
 });
 
+// Get Videos data :: DB에 있는 video 정보들을 반환한다.
 router.get("/getVideos", (req, res) => {
   // MongoDB 에서 video 정보들을 찾아 보내준다.
   Video.find()
@@ -63,8 +65,8 @@ router.get("/getVideos", (req, res) => {
     });
 });
 
+// Subscription Videos :: 구독중인 유저를 찾아서 해당 유저의 비디오 정보를 반환한다.
 router.post("/getSubscriptionVideos", (req, res) => {
-  // 구독중인 유저를 찾아서 해당 유저의 비디오 정보를 보내준다.
   Subscriber.find({ userFrom: req.body.userFrom }).exec((err, subscribers) => {
     if (err) return res.status(400).send(err);
 
@@ -82,8 +84,8 @@ router.post("/getSubscriptionVideos", (req, res) => {
   });
 });
 
+// Video Detail Info :: 해당 video의 정보를 전달한다.
 router.post("/getVideoDetail", (req, res) => {
-  //
   Video.findOne({ _id: req.body.videoId })
     .populate("writer")
     .exec((err, videoDetail) => {
