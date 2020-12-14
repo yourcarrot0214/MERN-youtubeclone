@@ -3,22 +3,22 @@ const Schema = mongoose.Schema;
 
 const likeSchema = mongoose.Schema(
   {
-    useId: {
-      type: Schema.Type.ObjectId,
+    userId: {
+      type: Schema.Types.ObjectId,
       ref: "User",
     },
     commentId: {
-      type: Schema.Type.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "Comment",
     },
     videoId: {
-      type: Schema.Type.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "Video",
     },
   },
   { timestamps: true }
 );
 
-const Like = mongoose.Schema("Like", likeSchema);
+const Like = mongoose.model("Like", likeSchema);
 
 module.exports = { Like };

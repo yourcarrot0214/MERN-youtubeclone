@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const disLikeSchema = mongoose.Schema(
   {
-    useId: {
+    userId: {
       type: Schema.Types.ObjectId,
       ref: "User",
     },
@@ -19,6 +19,6 @@ const disLikeSchema = mongoose.Schema(
   { timestamps: true }
 );
 
-const DisLike = mongoose.Schema("DisLike", disLikeSchema);
+const DisLike = mongoose.model("DisLike", disLikeSchema);
 
 module.exports = { DisLike };
