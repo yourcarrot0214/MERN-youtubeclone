@@ -49,7 +49,11 @@ function SingleComment(props) {
       commentId={props.comment._id}
       userId={localStorage.getItem("userId")}
     />,
-    <span onClick={onClickReplyOpen} key="comment-basic-reply-to">
+    <span
+      onClick={onClickReplyOpen}
+      key="comment-basic-reply-to"
+      style={{ marginLeft: "1rem" }}
+    >
       Reply to
     </span>,
   ];
