@@ -61,7 +61,7 @@ function Comment(props) {
               </React.Fragment>
             )
         )}
-      {/* Root Comment From */}
+      {/* Root Comment Form */}
 
       <form style={{ display: "flex" }} onSubmit={onSubmit}>
         <textarea
