@@ -26,6 +26,7 @@ function VideoDetailPage(props) {
     Axios.post("/api/comment/getComments", variable).then((response) => {
       if (response.data.success) {
         setComments(response.data.comments);
+        console.log(response.data.comments);
       } else {
         console.log("Failed :: get Comments data.");
       }

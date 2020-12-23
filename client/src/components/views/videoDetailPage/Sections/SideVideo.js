@@ -16,6 +16,8 @@ function SideVideo() {
   }, []);
 
   const renderSideVideo = sideVideos.map((video, index) => {
+    let minutes = Math.floor(video.duration / 60);
+    let seconds = Math.floor(video.duration - minutes * 60);
     return (
       <div
         key={index}
@@ -43,7 +45,9 @@ function SideVideo() {
             <br />
             <span>{video.views} views</span>
             <br />
-            <span>{Math.floor(video.duration)} seconds</span>
+            <span>
+              {minutes} : {seconds}
+            </span>
             <br />
           </a>
         </div>

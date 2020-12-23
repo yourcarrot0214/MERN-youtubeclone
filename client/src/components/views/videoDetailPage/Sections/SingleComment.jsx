@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 import { Comment, Avatar, Button, Input } from "antd";
 import Axios from "axios";
 import LikeDisLikes from "./LikeDisLikes";
+import moment from "moment";
+import "./styles/SingleComment.css";
 
 const { TextArea } = Input;
 
@@ -64,7 +66,17 @@ function SingleComment(props) {
         actions={actions}
         author={props.comment.writer.name}
         avatar={<Avatar src={props.comment.writer.image} alt="Writer Image" />}
-        content={<p>{props.comment.content}</p>}
+        content={
+          <p>
+            {props.comment.content}
+            <span className="comment-date">
+              {/* span tag css 수정 */}
+              {moment(props.comment.createdAt).format(
+                "YYYY[년] MM[월] DD[일] h:mm:ss a"
+              )}
+            </span>
+          </p>
+        }
       >
         {openReply && (
           <form style={{ display: "flex" }} onSubmit={onSubmit}>
