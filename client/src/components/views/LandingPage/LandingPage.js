@@ -66,7 +66,7 @@ function LandingPage() {
         <span>{video.writer.name}</span>
         <br />
         <span style={{ marginLeft: "3rem" }}>{video.views}</span>-{" "}
-        <span>{moment(video.createdAt).format("MMM Do YY")}</span>
+        <span>{moment(video.createdAt).format("YYYY[년] MM[월] DD[일]")}</span>
       </Col>
     );
   });

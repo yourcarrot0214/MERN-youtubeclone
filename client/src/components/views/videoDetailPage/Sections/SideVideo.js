@@ -9,7 +9,6 @@ function SideVideo() {
       if (response.data.success) {
         console.log(response.data);
         setSideVideos(response.data.videos);
-        console.log(sideVideos);
       } else {
         console.log("Failed :: get Videos.");
       }
