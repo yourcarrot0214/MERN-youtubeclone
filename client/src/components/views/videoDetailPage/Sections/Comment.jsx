@@ -8,6 +8,7 @@ const { TextArea } = Input;
 
 function Comment(props) {
   const user = useSelector((state) => state.user);
+  console.log(user);
   const videoId = props.postId;
   const [commentValue, setCommentValue] = useState("");
 
