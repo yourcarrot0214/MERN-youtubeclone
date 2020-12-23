@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 import Axios from "axios";
 import SingleComment from "./SingleComment";
 import ReplyComment from "./ReplyComment";
+import { Button, Input } from "antd";
+const { TextArea } = Input;
 
 function Comment(props) {
   const user = useSelector((state) => state.user);
@@ -64,16 +66,16 @@ function Comment(props) {
       {/* Root Comment From */}
 
       <form style={{ display: "flex" }} onSubmit={onSubmit}>
-        <textarea
+        <TextArea
           style={{ width: "100%", borderRadius: "5px" }}
           onChange={handleClick}
           value={commentValue}
           placeholder="코멘트를 작성해주세요."
         />
         <br />
-        <button style={{ width: "20%", height: "52px" }} onClick={onSubmit}>
+        <Button style={{ width: "20%", height: "52px" }} onClick={onSubmit}>
           Submit
-        </button>
+        </Button>
       </form>
     </div>
   );
