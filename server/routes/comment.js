@@ -26,7 +26,7 @@ router.post("/saveComment", (req, res) => {
 // Comment request :: From VideoDetailPage
 router.post("/getComments", (req, res) => {
   Comment.find({ postId: req.body.videoId })
-    .populate("wirter")
+    .populate("writer")
     .exec((err, comments) => {
       if (err) return res.status(400).json({ success: false, err });
       return res.status(200).json({ success: true, comments });
