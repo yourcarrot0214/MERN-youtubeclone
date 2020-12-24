@@ -70,7 +70,6 @@ function SingleComment(props) {
           <p>
             {props.comment.content}
             <span className="comment-date">
-              {/* span tag css 수정 */}
               {moment(props.comment.createdAt).format(
                 "YYYY[년] MM[월] DD[일] h:mm:ss a"
               )}
@@ -80,7 +79,7 @@ function SingleComment(props) {
       >
         {openReply && (
           <form style={{ display: "flex" }} onSubmit={onSubmit}>
-            <textarea
+            <TextArea
               style={{ width: "100%", borderRadius: "5px" }}
               onChange={onHandleChange}
               value={commentValue}
@@ -88,9 +87,9 @@ function SingleComment(props) {
             />
 
             <br />
-            <button style={{ width: "20%", height: "52px" }} onClick={onSubmit}>
+            <Button style={{ width: "20%", height: "52px" }} onClick={onSubmit}>
               Submit
-            </button>
+            </Button>
           </form>
         )}
       </Comment>
