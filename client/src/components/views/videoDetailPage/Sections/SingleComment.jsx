@@ -5,6 +5,7 @@ import Axios from "axios";
 import LikeDisLikes from "./LikeDisLikes";
 import moment from "moment";
 import "./styles/SingleComment.css";
+import EditComment from "./EditComment";
 
 const { TextArea } = Input;
 
@@ -58,6 +59,10 @@ function SingleComment(props) {
     >
       Reply to
     </span>,
+    <EditComment
+      comment={props.comment}
+      deleteFunction={props.deleteFunction}
+    />,
   ];
 
   return (

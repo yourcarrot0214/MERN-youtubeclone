@@ -37,6 +37,12 @@ function VideoDetailPage(props) {
     setComments(comments.concat(newComment));
   };
 
+  const deleteComment = (deletedComment) => {
+    setComments(
+      comments.filter((comment) => comment._id !== deletedComment._id)
+    );
+  };
+
   if (video.writer) {
     return (
       <Row gutter={[16, 16]}>
@@ -73,6 +79,7 @@ function VideoDetailPage(props) {
               postId={videoId}
               commentLists={comments}
               refreshFunction={updateComment}
+              deleteFunction={deleteComment}
             />
           </div>
         </Col>

@@ -8,7 +8,6 @@ const { TextArea } = Input;
 
 function Comment(props) {
   const user = useSelector((state) => state.user);
-  console.log(user);
   const videoId = props.postId;
   const [commentValue, setCommentValue] = useState("");
 
@@ -53,6 +52,7 @@ function Comment(props) {
                   postId={videoId}
                   comment={comment}
                   refreshFunction={props.refreshFunction}
+                  deleteFunction={props.deleteFunction}
                 />
                 <ReplyComment
                   key={comment.content + index}
@@ -60,6 +60,7 @@ function Comment(props) {
                   postId={videoId}
                   commentLists={props.commentLists}
                   refreshFunction={props.refreshFunction}
+                  deleteFunction={props.deleteFunction}
                 />
               </React.Fragment>
             )

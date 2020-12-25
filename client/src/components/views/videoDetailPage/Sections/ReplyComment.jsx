@@ -27,6 +27,7 @@ function ReplyComment(props) {
               postId={props.postId}
               comment={comment}
               refreshFunction={props.refreshFunction}
+              deleteFunction={props.deleteFunction}
             />
             <ReplyComment
               key={index + comment.writer._id}
