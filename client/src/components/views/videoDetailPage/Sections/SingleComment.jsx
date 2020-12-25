@@ -59,10 +59,12 @@ function SingleComment(props) {
     >
       Reply to
     </span>,
-    <EditComment
-      comment={props.comment}
-      deleteFunction={props.deleteFunction}
-    />,
+    props.comment.writer._id === localStorage.getItem("userId") ? (
+      <EditComment
+        comment={props.comment}
+        deleteFunction={props.deleteFunction}
+      />
+    ) : null,
   ];
 
   return (

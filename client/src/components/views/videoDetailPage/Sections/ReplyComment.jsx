@@ -34,6 +34,8 @@ function ReplyComment(props) {
               postId={props.postId}
               commentLists={props.commentLists}
               parentCommentId={comment._id}
+              refreshFunction={props.refreshFunction}
+              deleteFunction={props.deleteFunction}
             />
           </div>
         )}

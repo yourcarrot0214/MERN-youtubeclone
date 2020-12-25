@@ -12,8 +12,6 @@ function EditComment(props) {
 
     Axios.post("/api/comment/deleteComment", variables).then((response) => {
       if (response.data.success) {
-        console.log("Success :: delete comment.");
-        console.log("result", response.data.result);
         props.deleteFunction(response.data.result);
       } else {
         console.log("Failed :: delete comment.");
