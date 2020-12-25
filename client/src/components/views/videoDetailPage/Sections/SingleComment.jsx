@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { Comment, Avatar, Button, Input } from "antd";
+import { Comment, Avatar, Button, Input, Tooltip } from "antd";
 import Axios from "axios";
 import LikeDisLikes from "./LikeDisLikes";
 import moment from "moment";
@@ -66,15 +66,15 @@ function SingleComment(props) {
         actions={actions}
         author={props.comment.writer.name}
         avatar={<Avatar src={props.comment.writer.image} alt="Writer Image" />}
-        content={
-          <p>
-            {props.comment.content}
-            <span className="comment-date">
-              {moment(props.comment.createdAt).format(
-                "YYYY[년] MM[월] DD[일] h:mm:ss a"
-              )}
-            </span>
-          </p>
+        content={<p>{props.comment.content}</p>}
+        datetime={
+          <Tooltip
+            title={moment(props.comment.createdAt).format(
+              "YYYY[년] MM[월] DD[일] h:mm:ss a"
+            )}
+          >
+            <span>{moment(props.comment.createdAt, "YYYYMMDD").fromNow()}</span>
+          </Tooltip>
         }
       >
         {openReply && (
