@@ -33,6 +33,7 @@ router.post("/getComments", (req, res) => {
     });
 });
 
+// comment 삭제 요청 :: Comment model에서 해당 코멘트 정보 삭제
 router.post("/deleteComment", (req, res) => {
   Comment.findOneAndDelete({ _id: req.body.commentId }).exec((err, result) => {
     if (err) return res.status(400).json({ success: false, err });

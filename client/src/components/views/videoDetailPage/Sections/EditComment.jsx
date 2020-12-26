@@ -1,10 +1,8 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import Axios from "axios";
 import { Tooltip, Icon } from "antd";
 
 function EditComment(props) {
-  const user = useSelector((state) => state.user);
   const onDeleteFunction = () => {
     const variables = {
       commentId: props.comment._id,
