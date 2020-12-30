@@ -12,7 +12,11 @@ function Comment(props) {
   const [commentValue, setCommentValue] = useState("");
 
   const handleClick = (event) => {
-    setCommentValue(event.currentTarget.value);
+    if (localStorage.getItem("userId") === null) {
+      alert("회원가입 후 이용해 주세요.");
+    } else {
+      setCommentValue(event.currentTarget.value);
+    }
   };
 
   const onSubmit = (event) => {
